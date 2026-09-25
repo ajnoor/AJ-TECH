@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AJ Tech: AI Automation for Real Business Workflows</title>
+<meta name="description" content="AJ Tech builds AI automation systems for businesses: Instagram DM automation, AI order-taking, customer support, and custom workflows. Independent builder, human-in-the-loop by design.">
+<meta property="og:title" content="AJ Tech: AI Automation for Real Business Workflows">
+<meta property="og:description" content="Practical AI automation systems for messages, orders, leads and email. Built by an independent automation practitioner.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0d12; --bg-alt:#0c1017; --surface:#11151d; --border:#212836;
+  --text:#e8ecf3; --dim:#8d95a8; --faint:#565f72;
+  --accent:#2fd8e8; --accent-2:#4c86ff; --accent-glow:rgba(47,216,232,.14);
+  --mono:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;
+  --sans:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  box-sizing:border-box;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; scroll-padding-top:70px}
+body{margin:0; background:var(--bg); color:var(--text); font-family:var(--sans); line-height:1.55; -webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--sans); font-weight:600; line-height:1.15; margin:0}
+p{margin:0; color:var(--dim); max-width:62ch}
+a{color:inherit}
+.wrap{max-width:1120px; margin:0 auto; padding:0 24px}
+.section{padding:88px 0}
+.section-alt{background:var(--bg-alt)}
+.label{font-family:var(--mono); font-size:13px; color:var(--accent); letter-spacing:.02em}
+.h2{font-size:clamp(28px,3.6vw,38px); max-width:20ch}
+.lede{font-size:17px; margin-top:14px}
+.rail{border-left:1px solid var(--border); padding-left:22px}
+.hairline{border-top:1px solid var(--border)}
+
+/* nav */
+header{position:sticky; top:0; z-index:50; background:rgba(10,13,18,.82); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); padding-top:env(safe-area-inset-top,0px)}
+.nav{display:flex; align-items:center; justify-content:space-between; height:64px}
+.logo{font-weight:700; font-size:17px; text-decoration:none; display:flex; align-items:center; gap:8px}
+.logo-dot{width:8px; height:8px; border-radius:50%; background:var(--accent); box-shadow:0 0 10px var(--accent)}
+.nav-links{display:none; gap:32px; list-style:none; margin:0; padding:0}
+.nav-links a{text-decoration:none; color:var(--dim); font-size:14.5px; transition:color .15s}
+.nav-links a:hover, .nav-links a:focus-visible{color:var(--text)}
+.nav-cta{display:none; background:var(--text); color:var(--bg); border:none; padding:9px 16px; border-radius:6px; font-size:14px; font-weight:600; text-decoration:none; cursor:pointer}
+.burger{background:none; border:1px solid var(--border); border-radius:6px; width:38px; height:38px; display:flex; align-items:center; justify-content:center; color:var(--text); cursor:pointer}
+@media(min-width:860px){.nav-links{display:flex} .nav-cta{display:inline-block} .burger{display:none}}
+#mobmenu{display:none; flex-direction:column; gap:2px; padding:8px 0 18px; border-top:1px solid var(--border)}
+#mobmenu.open{display:flex}
+#mobmenu a{padding:12px 4px; text-decoration:none; color:var(--dim); border-bottom:1px solid var(--border); font-size:15px}
+#mobmenu a:last-child{border-bottom:none}
+
+/* buttons */
+.btn{display:inline-flex; align-items:center; gap:8px; padding:13px 22px; border-radius:6px; font-weight:600; font-size:15px; text-decoration:none; cursor:pointer; border:1px solid transparent}
+.btn-primary{background:var(--accent); color:#03181b}
+.btn-primary:hover{background:#4ee3f0}
+.btn-ghost{border-color:var(--border); color:var(--text)}
+.btn-ghost:hover{border-color:var(--accent)}
+a:focus-visible, button:focus-visible, summary:focus-visible{outline:2px solid var(--accent); outline-offset:3px}
+
+/* hero */
+.hero{padding:64px 0 88px}
+.hero-grid{display:grid; gap:52px}
+.hero h1{font-size:clamp(34px,5.2vw,54px); max-width:15ch}
+.hero .lede{font-size:18px; max-width:48ch; margin-top:18px}
+.hero-ctas{display:flex; flex-wrap:wrap; gap:14px; margin-top:30px}
+.proofline{margin-top:22px; font-size:13.5px; color:var(--faint); font-family:var(--mono)}
+@media(min-width:900px){.hero-grid{grid-template-columns:1.15fr 1fr; align-items:center}}
+
+/* pipeline diagram */
+.pipeline{background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:26px 24px; position:relative; overflow:hidden}
+.pipeline::before{content:'';position:absolute; inset:0; background:radial-gradient(420px 220px at 90% -10%, var(--accent-glow), transparent 70%); pointer-events:none}
+.node{display:flex; align-items:center; gap:12px; padding:10px 0; position:relative}
+.node .dot{width:9px; height:9px; border-radius:50%; background:var(--accent); border:1px solid var(--accent); flex-shrink:0; z-index:1; box-shadow:0 0 6px var(--accent-glow)}
+.node span{font-family:var(--mono); font-size:13.5px; color:var(--text)}
+.pipeline-line{position:absolute; left:33px; top:26px; bottom:26px; width:1px; background:var(--border)}
+
+/* problem list */
+.plist{list-style:none; margin:36px 0 0; padding:0; display:grid; gap:0}
+.plist li{padding:18px 0; border-top:1px solid var(--border); color:var(--dim); font-size:16px; display:flex; gap:14px}
+.plist li:last-child{border-bottom:1px solid var(--border)}
+.plist li::before{content:'-'; color:var(--faint); flex-shrink:0}
+
+/* services */
+.svc-row{display:grid; gap:8px; padding:26px 0; border-top:1px solid var(--border)}
+.svc-row:last-child{border-bottom:1px solid var(--border)}
+.svc-row h3{font-size:18px}
+.svc-row .tag{font-family:var(--mono); font-size:12px; color:var(--accent-2)}
+@media(min-width:760px){.svc-row{grid-template-columns:280px 1fr; align-items:baseline; gap:24px}}
+
+/* projects */
+.project{padding:52px 0; border-top:1px solid var(--border)}
+.project:last-child{border-bottom:1px solid var(--border)}
+.ptag{display:inline-block; font-family:var(--mono); font-size:12px; padding:4px 9px; border:1px solid var(--border); border-radius:4px; color:var(--accent); margin-bottom:14px}
+.project h3{font-size:24px; margin-bottom:12px}
+.project-grid{display:grid; gap:32px; margin-top:20px}
+@media(min-width:900px){.project-grid{grid-template-columns:1fr 1fr}}
+.pmeta{display:grid; gap:18px; margin-top:10px}
+.pmeta div b{display:block; font-size:12.5px; font-family:var(--mono); color:var(--faint); font-weight:500; letter-spacing:.02em; margin-bottom:6px}
+.pmeta div p{font-size:14.5px; max-width:none}
+.compact-grid{display:grid; gap:0; margin-top:12px}
+.compact{padding:24px 0; border-top:1px solid var(--border)}
+.compact:last-child{border-bottom:1px solid var(--border)}
+@media(min-width:760px){.compact-grid{grid-template-columns:1fr 1fr; column-gap:32px}.compact:nth-last-child(2){border-bottom:1px solid var(--border)}}
+
+/* process */
+.steps{display:grid; gap:0; margin-top:36px}
+.step{display:grid; grid-template-columns:44px 1fr; gap:18px; padding:22px 0; border-top:1px solid var(--border)}
+.step:last-child{border-bottom:1px solid var(--border)}
+.step .n{font-family:var(--mono); color:var(--accent); font-size:15px}
+.step h3{font-size:16.5px; margin-bottom:6px}
+.step p{font-size:14.5px}
+@media(min-width:760px){.steps{grid-template-columns:1fr 1fr; column-gap:32px}.step:nth-child(3),.step:nth-child(4){border-top:1px solid var(--border)}}
+
+/* trust */
+.trust{list-style:none; margin:32px 0 0; padding:0; display:grid; gap:16px}
+@media(min-width:760px){.trust{grid-template-columns:1fr 1fr; gap:24px 32px}}
+.trust li{border-left:2px solid var(--accent); padding-left:16px; font-size:15px; color:var(--dim)}
+
+/* stack */
+.pills{display:flex; flex-wrap:wrap; gap:10px; margin-top:28px}
+.pill{font-family:var(--mono); font-size:13px; color:var(--dim); border:1px solid var(--border); padding:7px 13px; border-radius:5px}
+
+/* faq */
+details{border-top:1px solid var(--border); padding:18px 0}
+details:last-child{border-bottom:1px solid var(--border)}
+summary{cursor:pointer; font-size:16px; font-weight:500; list-style:none; display:flex; justify-content:space-between; gap:16px; align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:'+'; font-family:var(--mono); color:var(--accent); font-size:20px; flex-shrink:0}
+details[open] summary::after{content:'–'}
+details p{margin-top:12px; font-size:14.5px}
+
+/* contact */
+.contact-box{background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:44px 32px; margin-top:32px}
+.clist{list-style:none; margin:26px 0 0; padding:0; display:grid; gap:0}
+.clist li{border-top:1px solid var(--border); padding:14px 0}
+.clist li:last-child{border-bottom:1px solid var(--border)}
+.clist a{text-decoration:none; font-size:15px; color:var(--text); display:flex; justify-content:space-between}
+.clist a:hover{color:var(--accent)}
+.clist span{color:var(--faint); font-family:var(--mono); font-size:12.5px}
+
+footer{padding:36px 0; border-top:1px solid var(--border)}
+footer .wrap{display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; font-size:13.5px; color:var(--faint)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <nav class="nav">
+      <a href="#top" class="logo"><span class="logo-dot"></span>AJ Tech</a>
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+      <a href="#contact" class="nav-cta">Start a project</a>
+      <button class="burger" id="burgerBtn" aria-expanded="false" aria-controls="mobmenu" aria-label="Toggle menu">☰</button>
+    </nav>
+    <div id="mobmenu">
+      <a href="#services">Services</a>
+      <a href="#projects">Projects</a>
+      <a href="#about">About</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="hero wrap">
+  <div class="hero-grid">
+    <div>
+      <p class="label">AI Automation Builder</p>
+      <h1>Automation for the messages, orders and emails piling up in your business.</h1>
+      <p class="lede">AJ Tech is an independent automation practice. I design and build the workflows: DM replies, order intake, lead capture, so your team spends less time repeating itself and more time running the business.</p>
+      <div class="hero-ctas">
+        <a href="#projects" class="btn btn-primary">See the automations</a>
+        <a href="#contact" class="btn btn-ghost">Start a project</a>
+      </div>
+      <p class="proofline">Independent builder. Direct access, no account managers.</p>
+    </div>
+    <div class="pipeline" aria-hidden="true">
+      <div class="pipeline-line"></div>
+      <div class="node active"><span class="dot"></span><span>Customer message arrives</span></div>
+      <div class="node active"><span class="dot"></span><span>AI agent reads intent</span></div>
+      <div class="node"><span class="dot"></span><span>Workflow decides next step</span></div>
+      <div class="node"><span class="dot"></span><span>Business tool updated</span></div>
+      <div class="node"><span class="dot"></span><span>Human reviews if needed</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="wrap">
+    <p class="label">The problem</p>
+    <h2 class="h2">The work that shouldn't need a human every time</h2>
+    <ul class="plist">
+      <li>The same customer questions, answered by hand, over and over</li>
+      <li>Order details copied manually from a chat into a spreadsheet</li>
+      <li>DMs that go unanswered overnight and lose the sale</li>
+      <li>Leads scattered across Instagram, email and someone's notes app</li>
+      <li>Follow-ups that quietly slip through the cracks</li>
+      <li>Staff hours spent typing replies a workflow could send</li>
+    </ul>
+    <p style="margin-top:28px; color:var(--text); font-size:16px">AJ Tech builds the automation layer that handles this, with a human still in control of anything that matters.</p>
+  </div>
+</section>
+
+<section class="section" id="services">
+  <div class="wrap">
+    <p class="label">Services</p>
+    <h2 class="h2">What I build</h2>
+    <div style="margin-top:8px">
+      <div class="svc-row">
+        <h3>Instagram DM Automation<br><span class="tag">n8n · Meta API</span></h3>
+        <p>An AI agent that reads incoming DMs, answers common questions, and hands off anything ambiguous to a person, so replies go out in minutes, not hours.</p>
+      </div>
+      <div class="svc-row">
+        <h3>AI Customer Support<br><span class="tag">chat · FAQ routing</span></h3>
+        <p>Handles the repetitive product and support questions, and routes the rest into the right workflow instead of a shared inbox.</p>
+      </div>
+      <div class="svc-row">
+        <h3>AI Order-Taking<br><span class="tag">Sheets · human review</span></h3>
+        <p>Collects order details through conversation and logs them to Google Sheets as pending. A person always confirms before anything ships.</p>
+      </div>
+      <div class="svc-row">
+        <h3>Lead Capture &amp; Management<br><span class="tag">forms · routing</span></h3>
+        <p>Pulls leads out of DMs, forms and emails into one place, so nothing is tracked in someone's head or a screenshot folder.</p>
+      </div>
+      <div class="svc-row">
+        <h3>Gmail &amp; Email Automation<br><span class="tag">classification · extraction</span></h3>
+        <p>Reads incoming email, sorts and extracts what matters, and triggers the right downstream action automatically.</p>
+      </div>
+      <div class="svc-row">
+        <h3>Custom AI Workflows<br><span class="tag">n8n · webhooks · APIs</span></h3>
+        <p>If your process doesn't fit a template, I design the workflow around how your business actually operates.</p>
+      </div>
+      <div class="svc-row">
+        <h3>AI Agents<br><span class="tag">tools · memory</span></h3>
+        <p>Agents that hold context across a conversation and call the right tool for the job, instead of one static script.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="projects">
+  <div class="wrap">
+    <p class="label">Featured work</p>
+    <h2 class="h2">What I've actually built</h2>
+
+    <div class="project">
+      <span class="ptag">AJ Tech Build</span>
+      <h3>Instagram DM Automation</h3>
+      <div class="project-grid">
+        <div class="pmeta">
+          <div><b>PROBLEM</b><p>Customers message businesses on Instagram expecting a fast reply. Most small teams can't keep up around the clock, and messages sit unanswered overnight.</p></div>
+          <div><b>SOLUTION</b><p>An AI agent wired directly into Instagram DMs through the Meta API and n8n. It reads intent, answers common questions in English, Urdu and Roman Urdu, keeps context across the conversation, and escalates anything sensitive to a human.</p></div>
+          <div><b>THE HARD PART</b><p>Getting webhook verification, token auth and public exposure right, and stopping the bot from replying to its own messages, a real failure mode most tutorials skip over.</p></div>
+        </div>
+        <div class="pipeline" style="padding:22px 20px">
+          <div class="pipeline-line"></div>
+          <div class="node active"><span class="dot"></span><span>Customer</span></div>
+          <div class="node active"><span class="dot"></span><span>Instagram DM</span></div>
+          <div class="node active"><span class="dot"></span><span>Meta API → Webhook</span></div>
+          <div class="node active"><span class="dot"></span><span>n8n workflow</span></div>
+          <div class="node active"><span class="dot"></span><span>AI agent</span></div>
+          <div class="node"><span class="dot"></span><span>Response / handoff</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="project">
+      <span class="ptag">AJ Tech Build</span>
+      <h3>AI Order-Taking</h3>
+      <div class="project-grid">
+        <div class="pmeta">
+          <div><b>PROBLEM</b><p>Taking orders over chat means manually copying names, addresses and product details into a spreadsheet: slow, and easy to get wrong.</p></div>
+          <div><b>SOLUTION</b><p>A conversational flow collects name, phone, address, product, variant and quantity, then writes it straight to Google Sheets, structured rather than a wall of chat text.</p></div>
+          <div><b>THE RULE THAT MATTERS</b><p>The AI never tells a customer their order is confirmed. Every order lands as <em>Pending Human Confirmation</em> until a team member reviews it.</p></div>
+        </div>
+        <div class="pipeline" style="padding:22px 20px">
+          <div class="pipeline-line"></div>
+          <div class="node active"><span class="dot"></span><span>Customer</span></div>
+          <div class="node active"><span class="dot"></span><span>AI conversation</span></div>
+          <div class="node active"><span class="dot"></span><span>Structured order data</span></div>
+          <div class="node active"><span class="dot"></span><span>Google Sheets</span></div>
+          <div class="node active"><span class="dot"></span><span>Human review</span></div>
+          <div class="node"><span class="dot"></span><span>Confirmed</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="compact-grid">
+      <div class="compact">
+        <span class="ptag">AJ Tech Demo</span>
+        <h3 style="font-size:18px; margin-bottom:8px">AI Customer Support</h3>
+        <p style="font-size:14.5px">Answers repetitive product and FAQ questions, and routes anything outside its depth to a human, built to cut down on the same five conversations happening fifty times a week.</p>
+      </div>
+      <div class="compact">
+        <span class="ptag">Internal Project</span>
+        <h3 style="font-size:18px; margin-bottom:8px">PHANTOM</h3>
+        <p style="font-size:14.5px">Started as one large assistant meant to do everything. Rebuilt as smaller, specialized workflows with their own tools and memory: modular, easier to debug, easier to extend.</p>
+      </div>
+      <div class="compact">
+        <span class="ptag">Workflow Automation</span>
+        <h3 style="font-size:18px; margin-bottom:8px">Gmail &amp; Email Automation</h3>
+        <p style="font-size:14.5px">Reads incoming email, classifies and extracts what matters, and triggers the right downstream action instead of leaving it for someone to sort manually.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <p class="label">Process</p>
+    <h2 class="h2">How a project runs</h2>
+    <div class="steps">
+      <div class="step"><span class="n">01</span><div><h3>Discovery</h3><p>We walk through the workflow that's actually eating your team's time.</p></div></div>
+      <div class="step"><span class="n">02</span><div><h3>Design</h3><p>I map the automation: what the AI handles, and what a human reviews.</p></div></div>
+      <div class="step"><span class="n">03</span><div><h3>Build</h3><p>Wired up in n8n, connected to your tools, tested against real scenarios.</p></div></div>
+      <div class="step"><span class="n">04</span><div><h3>Handoff</h3><p>You get a working system and a plain explanation of how it runs.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="wrap">
+    <p class="label">Why AJ Tech</p>
+    <h2 class="h2">Built by one person, on purpose</h2>
+    <ul class="trust">
+      <li>You're talking to the person building your system, not an account manager.</li>
+      <li>Every workflow has a human checkpoint on anything that shouldn't run unsupervised.</li>
+      <li>Built on infrastructure I run and understand myself, not templates stitched together.</li>
+      <li>Early-stage and upfront about it: you'll see real builds, not inflated case studies.</li>
+    </ul>
+    <div class="pills">
+      <span class="pill">n8n</span><span class="pill">Meta / Instagram API</span><span class="pill">Docker</span>
+      <span class="pill">Tailscale</span><span class="pill">Gemini</span><span class="pill">Groq</span>
+      <span class="pill">OpenRouter</span><span class="pill">Google Sheets</span><span class="pill">Gmail</span>
+      <span class="pill">Supabase</span><span class="pill">Airtable</span><span class="pill">GitHub</span>
+      <span class="pill">REST APIs</span><span class="pill">Webhooks</span><span class="pill">Python</span>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <div class="wrap">
+    <p class="label">About</p>
+    <h2 class="h2">The person behind AJ Tech</h2>
+    <p class="lede" style="margin-top:18px">AJ Tech is run by me, an independent automation builder who got here by wiring the messy parts together myself: webhooks, API auth, self-hosted n8n on Docker, tunnels to expose things safely, and AI models that don't always behave the way the docs say they will. I'm early in building this as a business, which means I'd rather show you a working system than a polished sales pitch.</p>
+  </div>
+</section>
+
+<section class="section section-alt" id="faq">
+  <div class="wrap" style="max-width:820px">
+    <p class="label">FAQ</p>
+    <h2 class="h2">Questions people actually ask</h2>
+    <div style="margin-top:24px">
+      <details><summary>What can AJ Tech actually automate?</summary><p>Anything with a repeatable pattern: customer messages, order intake, lead capture, email handling. If it's a conversation or a process you're doing the same way every time, it's a candidate.</p></details>
+      <details><summary>Can you automate my Instagram DMs?</summary><p>Yes, that's one of the core builds. It connects through the Meta API and can handle English, Urdu and Roman Urdu, with escalation to a human when needed.</p></details>
+      <details><summary>Can the AI take orders on its own?</summary><p>It can collect and structure the order, but it never confirms one. Every order is marked pending until a person reviews it.</p></details>
+      <details><summary>Do I need to review what the AI does?</summary><p>For anything customer-facing or order-related, yes by design: a human checkpoint is built into the workflow, not bolted on afterward.</p></details>
+      <details><summary>Can this connect to Google Sheets or tools I already use?</summary><p>Usually. Sheets, Airtable, Supabase and most tools with an API or webhook can be wired in.</p></details>
+      <details><summary>Can you automate my Gmail inbox?</summary><p>Yes. Reading, classifying and extracting from incoming email, and triggering the right action.</p></details>
+      <details><summary>What does a project cost?</summary><p>It depends on the workflow. There's no fixed price list. Tell me what you need automated and I'll give you a straight answer.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <div class="wrap" style="max-width:720px; text-align:left">
+    <p class="label">Contact</p>
+    <h2 class="h2">Tell me what's eating your team's time.</h2>
+    <div class="contact-box">
+      <p style="color:var(--text); font-size:16px">Send a short note about what you'd like automated. I read and reply myself.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>AJ Tech: AI automation for real business workflows.</span>
+    <span>© 2026 AJ Tech</span>
+  </div>
+</footer>
+
+<script>
+const b=document.getElementById('burgerBtn'), m=document.getElementById('mobmenu');
+b.addEventListener('click',()=>{const open=m.classList.toggle('open'); b.setAttribute('aria-expanded',open);});
+m.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{m.classList.remove('open'); b.setAttribute('aria-expanded','false');}));
+</script>
+</body>
+</html>
